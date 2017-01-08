@@ -79,7 +79,7 @@ class JenkinsApi {
         def ignoreTags = ["assignedNode"]
 
         // should work if there's a remote ("origin/master") or no remote (just "master")
-        config = config.replaceAll("(\\p{Alnum}*[>/])(${templateJob.templateBranchName})<") { fullMatch, prefix, branchName ->
+        config = config.replaceAll("(\\p{Alnum}*[>/].*)(${templateJob.templateBranchName}).*<") { fullMatch, prefix, branchName ->
             // jenkins job configs may have certain fields whose values should not be replaced, the most common being <assignedNode>
             // which is used to assign a job to a specific node (potentially "master") and the "master" branch
             if (ignoreTags.find { it + ">" == prefix}) {
